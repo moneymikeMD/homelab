@@ -1,0 +1,23 @@
+version: '3'
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "784:784/udp"
+      - "853:853/tcp"
+      - "3000:3000/tcp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    volumes:
+      - /home/docker/adguard/work:/opt/adguardhome/work
+      - /home/docker/adguard/config:/opt/adguardhome/conf
+    restart: unless-stopped
+    networks:
+      pub_net:
+        ipv4_address: 10.100.1.204
+networks:
+  pub_net:
+    external: true
