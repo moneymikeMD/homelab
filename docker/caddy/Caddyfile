@@ -1,0 +1,4 @@
+
+app.home.dipuce.com {
+    reverse_proxy /adguard/* 10.100.1.204
+}
