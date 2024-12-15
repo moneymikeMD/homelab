@@ -8,44 +8,44 @@
 }
 
 (inttls) {
-    tls /etc/ssl/home.dipuce.com/fullchain.cer /etc/ssl/home.dipuce.com/home.dipuce.com.key
+    tls /etc/ssl/app.dipuce.com/fullchain.cer /etc/ssl/app.dipuce.com/app.dipuce.com.key
 }
 
-app.home.dipuce.com {
+app.app.dipuce.com {
     import inttls
     reverse_proxy /adguard/* 10.100.1.204
 }
 
-dns.home.dipuce.com {
+dns.app.dipuce.com {
     import inttls
     reverse_proxy 10.100.1.204
 }
 
-unifi.home.dipuce.com {
+unifi.app.dipuce.com {
     import inttls
     reverse_proxy 10.100.1.1
 }
 
 # ProxMox
-pve.home.dipuce.com {
+pve.app.dipuce.com {
     import inttls
     reverse_proxy 10.100.1.158:8006
 }
 
 # Portainer
-docker.home.dipuce.com {
+docker.app.dipuce.com {
     import inttls
     reverse_proxy 10.100.1.139:9443
 }
 
 # TrueNas Scale
-storage.home.dipuce.com {
+storage.app.dipuce.com {
     import inttls
     reverse_proxy 10.100.1.115
 }
 
 # HomeAssistant
-ha.home.dipuce.com {
+ha.app.dipuce.com {
     import inttls
     reverse_proxy 10.100.1.203:8123
 }
