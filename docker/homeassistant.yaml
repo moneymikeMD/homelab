@@ -8,6 +8,7 @@ services:
       - /home/docker/homeassistant/config:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
+      - /certs/app.dipuce.com:/etc/ssl
     restart: unless-stopped
     privileged: true
     networks:
