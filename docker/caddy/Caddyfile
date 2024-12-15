@@ -1,4 +1,27 @@
 
+{
+    # Global options block. Entirely optional, https is on by default
+    # Optional email key for lets encrypt
+    email mike@dipuce.com
+    # Optional staging lets encrypt for testing. Comment out for production.
+    # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+(inttls) {
+    tls /certs/home.dipuce.com/fullchain.cer /certs/home.dipuce.com/home.dipuce.com.key
+}
+
 app.home.dipuce.com {
+    import inttls
     reverse_proxy /adguard/* 10.100.1.204
+}
+
+dns.home.dipuce.com {
+    import inttls
+    reverse_proxy 10.100.1.204
+}
+
+unifi.home.dipuce.com {
+    import inttls
+    reverse_proxy 10.100.1.1
 }

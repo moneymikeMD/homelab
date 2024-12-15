@@ -11,6 +11,7 @@ services:
       - /home/docker/caddy/site:/srv
       - caddy_data:/data
       - caddy_config:/config
+      - /certs/home.dipuce.com:/etc/ssl/home.dipuce.com
     networks:
       pub_net:
         ipv4_address: 10.100.1.201
