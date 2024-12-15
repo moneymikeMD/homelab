@@ -47,5 +47,10 @@ storage.app.dipuce.com {
 # HomeAssistant
 ha.app.dipuce.com {
     import inttls
-    reverse_proxy 10.100.1.203:8123
+    reverse_proxy https://10.100.1.203:8123 {
+        transport http {
+            tls_server_name ha.app.dipuce.com
+        }
+        header_up Host {upstream_hostport}
+    }
 }
