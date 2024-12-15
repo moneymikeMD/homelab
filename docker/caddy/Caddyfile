@@ -8,7 +8,7 @@
 }
 
 (inttls) {
-    tls /certs/home.dipuce.com/fullchain.cer /certs/home.dipuce.com/home.dipuce.com.key
+    tls /etc/ssl/home.dipuce.com/fullchain.cer /etc/ssl/home.dipuce.com/home.dipuce.com.key
 }
 
 app.home.dipuce.com {
