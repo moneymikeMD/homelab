@@ -1,0 +1,23 @@
+version: "2"
+
+services:
+  portainer:
+    image: portainer/portainer-ee:2.21.4
+    command:
+      -H unix:///var/run/docker.sock
+      --sslcert /etc/ssl/fullchain.cer
+      --sslkey /etc/ssl/app.dipuce.com.key
+    restart: always
+    environment:
+      - VIRTUAL_HOST=docker.app.dipuce.com
+      - VIRTUAL_PORT=9443
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+      - /certs/app.dipuce.com:/etc/ssl
+
+volumes:
+  portainer_data:
