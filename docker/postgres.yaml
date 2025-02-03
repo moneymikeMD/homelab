@@ -1,9 +1,9 @@
-version: '3'
 services:
   db:
     image: postgres
     restart: always
-    env_file: stack.env # portainer convention
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
