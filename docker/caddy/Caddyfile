@@ -54,3 +54,8 @@ ha.app.dipuce.com {
         header_up Host {upstream_hostport}
     }
 }
+
+# n8n
+n8n.app.dipuce.com {
+    reverse_proxy 10.100.1.208:5678
+}

@@ -12,9 +12,9 @@ docker run -d \
 -p 9443:9443 \
 --name=portainer \
 --restart=always \
---sslcert /etc/user-ssl/fullchain.cer \
---sslkey /etc/user-ssl/app.dipuce.com.key \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v portainer_data:/data \
 -v /certs/app.dipuce.com:/etc/user-ssl \
-portainer/portainer-ee
+portainer/portainer-ee \
+--sslcert /etc/user-ssl/fullchain.cer \
+--sslkey /etc/user-ssl/app.dipuce.com.key
