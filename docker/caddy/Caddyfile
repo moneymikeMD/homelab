@@ -59,3 +59,35 @@ ha.app.dipuce.com {
 n8n.app.dipuce.com {
     reverse_proxy 10.100.1.208:5678
 }
+
+usenet.app.dipuce.com {
+    reverse_proxy 10.100.1.209:6789
+}
+
+torrent.app.dipuce.com {
+    reverse_proxy 10.100.1.209:8080
+}
+
+prowlarr.app.dipuce.com {
+    reverse_proxy 10.100.1.209:9696
+}
+
+sonarr.app.dipuce.com {
+    reverse_proxy 10.100.1.210:8989
+}
+
+radarr.app.dipuce.com {
+    reverse_proxy 10.100.1.211:7878
+}
+
+lidarr.app.dipuce.com {
+    reverse_proxy 10.100.1.212:8686
+}
+
+bazarr.app.dipuce.com {
+    reverse_proxy 10.100.1.213:6767
+}
+
+jellyseerr.app.dipuce.com {
+    reverse_proxy 10.100.1.215:5055
+}

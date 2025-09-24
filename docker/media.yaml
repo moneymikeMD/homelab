@@ -61,7 +61,6 @@ services:
     depends_on:
       gluetun:
         condition: service_healthy
-        restart: true
     network_mode: service:gluetun
     healthcheck:
       test: ping -c 1 www.google.com || exit 1
@@ -97,7 +96,6 @@ services:
     depends_on:
       gluetun:
         condition: service_healthy
-        restart: true
     restart: unless-stopped
     network_mode: service:gluetun
 
@@ -115,7 +113,6 @@ services:
     depends_on:
       gluetun:
         condition: service_healthy
-        restart: true
     network_mode: service:gluetun
 
   sonarr:

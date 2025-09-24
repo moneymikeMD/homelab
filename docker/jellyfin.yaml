@@ -1,0 +1,55 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=3006
+      - PGID=3006
+      - TZ=America/New_York
+      - JELLYFIN_PublishedServerUrl=http://10.0.0.101 #optional
+    networks:
+      pub_net:
+        ipv4_address: 10.100.1.216
+    volumes:
+      - ./config:/config
+      - /mnt/data:/data
+#    devices:
+#      - /dev/dri:/dev/dri #Use for Intel QuickSync
+    ports:
+      - "8096:8096"
+      - "7359:7359/udp" #Service Discovery
+      - "1900:1900/udp" #Client Discovery
+    restart: unless-stopped
+  # Remove the Jellyfin service if installed directly on system.
+
+  jellystat-db:
+    image: postgres:15.2
+    container_name: jellystat-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - ./jellystat/postgres:/var/lib/postgresql/data
+
+  jellystat:
+    image: cyfershepard/jellystat:latest
+    container_name: jellystat
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_IP: jellystat-db
+      POSTGRES_PORT: 5432
+      JWT_SECRET: "my-secret-jwt-key"
+      TZ: America/New_York
+    volumes:
+      - ./jellystat/backup-data:/app/backend/backup-data
+    ports:
+      - "3000:3000"
+    depends_on:
+      - jellystat-db
+networks:
+  pub_net:
+    external: true
+# Want more!? https://github.com/awesome-jellyfin/awesome-jellyfin
