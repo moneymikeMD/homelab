@@ -6,7 +6,7 @@ services:
       - PUID=3006
       - PGID=3006
       - TZ=America/New_York
-      - JELLYFIN_PublishedServerUrl=http://10.0.0.101 #optional
+      - JELLYFIN_PublishedServerUrl=http://10.100.1.216 #optional
     networks:
       pub_net:
         ipv4_address: 10.100.1.216
