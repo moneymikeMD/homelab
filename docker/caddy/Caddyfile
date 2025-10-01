@@ -99,3 +99,7 @@ media.app.dipuce.com {
 dashboard.app.dipuce.com {
     reverse_proxy 10.100.1.217:7575
 }
+
+cloud.app.dipuce.com {
+    reverse_proxy 10.100.1.218:11000
+}
