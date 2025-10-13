@@ -1,25 +1,64 @@
 services:
-  db:
-    image: postgres
-    restart: always
+  postgres:
+    image: postgres:18-alpine
+    container_name: postgres
+    restart: unless-stopped
+    user: "3008:3009"
+
     environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
+      # Required: Set your own secure password
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      TZ: America/New_York
+
+      # Performance tuning
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
+
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      # Persistent data storage
+      - /mnt/dstorage/postgres:/var/lib/postgresql
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/localtime:/etc/localtime:ro
+
+      # Optional: Custom configuration
+      # - ./postgresql.conf:/etc/postgresql/postgresql.conf
+
+      # Optional: Initialization scripts
+      # - ./init-scripts:/docker-entrypoint-initdb.d
+
     networks:
       pub_net:
         ipv4_address: 10.100.1.206
 
-  adminer:
-    image: adminer
-    restart: always
     ports:
-      - "8080:8080"
+      - "5432:5432"
 
-volumes:
-  pgdata:
+    # Health check
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+    # Security: Run as non-root user (postgres user is used by default)
+    # Resource limits (adjust based on your needs)
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+    # Enable logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   pub_net:

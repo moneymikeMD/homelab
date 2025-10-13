@@ -103,3 +103,7 @@ dashboard.app.dipuce.com {
 cloud.app.dipuce.com {
     reverse_proxy 10.100.1.218:11000
 }
+
+id.app.dipuce.com {
+    reverse_proxy 10.100.1.219:1411
+}
